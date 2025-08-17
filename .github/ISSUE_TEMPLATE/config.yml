@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/YOUR_USERNAME/TidySnips/discussions
+    about: Ask questions, share ideas, and discuss TidySnips with the community
+  - name: 📖 Documentation
+    url: https://github.com/YOUR_USERNAME/TidySnips#readme
+    about: Check our comprehensive documentation for guides and API references
+  - name: 🔒 Security Issues
+    url: https://github.com/YOUR_USERNAME/TidySnips/security/advisories/new
+    about: Report security vulnerabilities privately (recommended for critical issues)

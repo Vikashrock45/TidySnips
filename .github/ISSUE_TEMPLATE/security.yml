@@ -1,0 +1,90 @@
+name: Security Vulnerability
+description: Report a security vulnerability (Please use private disclosure for critical issues)
+title: "[SECURITY] "
+labels: ["security", "vulnerability"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # ⚠️ Security Vulnerability Report
+        
+        **IMPORTANT:** For critical security vulnerabilities, please follow our responsible disclosure process outlined in SECURITY.md instead of creating a public issue.
+        
+        This template is for non-critical security improvements and general security-related discussions.
+
+  - type: checkboxes
+    id: severity-check
+    attributes:
+      label: Severity Assessment
+      description: Please confirm the severity level
+      options:
+        - label: This is NOT a critical security vulnerability that could compromise user data or system integrity
+          required: true
+        - label: I have read the SECURITY.md file and understand the responsible disclosure process
+          required: true
+
+  - type: dropdown
+    id: vulnerability-type
+    attributes:
+      label: Vulnerability Type
+      description: What type of security issue is this?
+      options:
+        - General Security Improvement
+        - Configuration Hardening
+        - Dependency Update
+        - Security Documentation
+        - Security Testing
+        - Other Security Enhancement
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the security concern or improvement
+      placeholder: A clear description of the security issue or improvement suggestion.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential Impact
+      description: What is the potential impact of this security issue?
+      placeholder: Describe the potential security implications.
+    validations:
+      required: true
+
+  - type: textarea
+    id: mitigation
+    attributes:
+      label: Suggested Mitigation
+      description: Do you have suggestions for how to address this?
+      placeholder: Any suggestions for fixing or improving this security aspect.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Environment details where this was observed
+      placeholder: |
+        - Deployment method: [Docker, local, cloud]
+        - Version: [e.g. 1.0.0]
+        - Configuration: [relevant security settings]
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ### 📋 Security Checklist
+        
+        Before submitting, please ensure:
+        - [ ] This is not a critical vulnerability requiring private disclosure
+        - [ ] You have reviewed our security documentation
+        - [ ] You are not sharing sensitive information in this public issue
+        
+        Thank you for helping improve TidySnips security! 🔒
