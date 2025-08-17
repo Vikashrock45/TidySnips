@@ -2,26 +2,23 @@
 import React, { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
-// Import language support for Prism
-import "prismjs/components/prism-go";
+// Import only core language support for Prism (these are more reliably available)
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-go";
 import "prismjs/components/prism-css";
-import "prismjs/components/prism-html";
 import "prismjs/components/prism-json";
-import "prismjs/components/prism-php";
 
-const LANGUAGES = ["JavaScript", "TypeScript", "Go", "JSON", "CSS", "HTML", "PHP"];
+const LANGUAGES = ["JavaScript", "TypeScript", "Go", "JSON", "CSS", "HTML"];
 
-// Language to Prism mapping
+// Language to Prism mapping (using fallbacks for reliability)
 const PRISM_LANGUAGE_MAP: { [key: string]: string } = {
   "JavaScript": "javascript",
   "TypeScript": "typescript", 
   "Go": "go",
   "JSON": "json",
   "CSS": "css",
-  "HTML": "html",
-  "PHP": "php"
+  "HTML": "markup" // HTML uses 'markup' in Prism.js core
 };
 
 export default function Home() {
@@ -85,7 +82,9 @@ export default function Home() {
 
   // Get the appropriate Prism language class
   const getPrismLanguage = (lang: string) => {
-    return PRISM_LANGUAGE_MAP[lang] || "javascript";
+    const prismLang = PRISM_LANGUAGE_MAP[lang] || "javascript";
+    // Verify the language is loaded, fallback to javascript if not
+    return Prism.languages[prismLang] ? prismLang : "javascript";
   };
 
   // Enhanced syntax-highlighted display component
