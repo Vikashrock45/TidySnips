@@ -59,12 +59,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const adSenseId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ID;
+  const adsEnabled = process.env.NEXT_PUBLIC_ADS_ENABLED === 'true';
   
   return (
     <html lang="en">
       <head>
         {/* Google AdSense */}
-        {adSenseId && adSenseId !== 'ca-pub-YOUR_PUBLISHER_ID' && (
+        {adsEnabled && adSenseId && adSenseId !== 'ca-pub-YOUR_PUBLISHER_ID' && (
           <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adSenseId}`}
