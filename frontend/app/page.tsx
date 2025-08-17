@@ -2,8 +2,27 @@
 import React, { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "prismjs/themes/prism.css";
+// Import language support for Prism
+import "prismjs/components/prism-go";
+import "prismjs/components/prism-javascript";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-html";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-php";
 
-const LANGUAGES = ["Go", "JSON", "PHP"];
+const LANGUAGES = ["JavaScript", "TypeScript", "Go", "JSON", "CSS", "HTML", "PHP"];
+
+// Language to Prism mapping
+const PRISM_LANGUAGE_MAP: { [key: string]: string } = {
+  "JavaScript": "javascript",
+  "TypeScript": "typescript", 
+  "Go": "go",
+  "JSON": "json",
+  "CSS": "css",
+  "HTML": "html",
+  "PHP": "php"
+};
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -62,6 +81,65 @@ export default function Home() {
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
+  };
+
+  // Get the appropriate Prism language class
+  const getPrismLanguage = (lang: string) => {
+    return PRISM_LANGUAGE_MAP[lang] || "javascript";
+  };
+
+  // Enhanced syntax-highlighted display component
+  const SyntaxHighlightedOutput = ({ code, language }: { code: string, language: string }) => {
+    const prismLang = getPrismLanguage(language);
+    
+    useEffect(() => {
+      Prism.highlightAll();
+    }, [code, language]);
+
+    return (
+      <div style={{ position: "relative" }}>
+        <pre 
+          style={{
+            width: "100%",
+            fontFamily: "Fira Mono, Menlo, Monaco, Consolas, monospace",
+            fontSize: 14,
+            padding: 20,
+            borderRadius: 12,
+            border: `2px solid ${borderColor}`,
+            minHeight: 850,
+            height: 850,
+            boxSizing: "border-box",
+            background: codeBg,
+            color: codeColor,
+            overflow: "auto",
+            margin: 0,
+            boxShadow: `inset 0 2px 4px ${shadowColor}`,
+            lineHeight: 1.5
+          }}
+        >
+          <code className={`language-${prismLang}`}>
+            {code || `// ${mode === "format" ? "Formatted" : "Minified"} ${language} code will appear here...\n// Click "${mode === "format" ? "🚀 Format" : "⚡ Minify"}" to process your code`}
+          </code>
+        </pre>
+        
+        {/* Language indicator */}
+        <div style={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+          background: darkMode ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)",
+          color: darkMode ? "#fff" : "#333",
+          padding: "4px 8px",
+          borderRadius: 6,
+          fontSize: 12,
+          fontWeight: 600,
+          border: `1px solid ${borderColor}`,
+          backdropFilter: "blur(4px)"
+        }}>
+          {language}
+        </div>
+      </div>
+    );
   };
 
   const getAllJsonPaths = (obj: any, basePath: string = 'root', paths: string[] = []): string[] => {
@@ -437,8 +515,25 @@ export default function Home() {
                   e.currentTarget.style.boxShadow = `inset 0 2px 4px ${shadowColor}`;
                 }}
                 rows={16}
-                placeholder="Paste your code here..."
+                placeholder={`Paste your ${language} code here...`}
               />
+              
+              {/* Language indicator for input */}
+              <div style={{
+                position: "absolute",
+                top: 8,
+                right: 8,
+                background: darkMode ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)",
+                color: darkMode ? "#fff" : "#333",
+                padding: "4px 8px",
+                borderRadius: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                border: `1px solid ${borderColor}`,
+                backdropFilter: "blur(4px)"
+              }}>
+                Input: {language}
+              </div>
             </div>
           )}
         </div>
@@ -660,37 +755,7 @@ export default function Home() {
                   {renderJsonWithCollapse(output)}
                 </div>
               ) : (
-                <textarea
-                  value={output}
-                  onChange={e => setOutput(e.target.value)}
-                  style={{
-                    width: "100%",
-                    fontFamily: "Fira Mono, Menlo, Monaco, Consolas, monospace",
-                    fontSize: 16,
-                    padding: 20,
-                    borderRadius: 12,
-                    border: `2px solid ${borderColor}`,
-                    minHeight: 850,
-                    height: 850,
-                    boxSizing: "border-box",
-                    background: codeBg,
-                    color: codeColor,
-                    transition: "all 0.2s ease",
-                    boxShadow: `inset 0 2px 4px ${shadowColor}`,
-                    resize: "none",
-                    outline: "none"
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "#007acc";
-                    e.currentTarget.style.boxShadow = `inset 0 2px 4px ${shadowColor}, 0 0 0 3px rgba(0, 122, 204, 0.1)`;
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = borderColor;
-                    e.currentTarget.style.boxShadow = `inset 0 2px 4px ${shadowColor}`;
-                  }}
-                  rows={16}
-                  placeholder="Response will appear here... (editable)"
-                />
+                <SyntaxHighlightedOutput code={output} language={language} />
               )}
             </div>
           )}
