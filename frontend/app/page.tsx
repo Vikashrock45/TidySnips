@@ -293,7 +293,8 @@ export default function Home() {
           justifyContent: "center",
           flexDirection: "row",
           maxWidth: "1400px",
-          margin: "0 auto"
+          margin: "0 auto",
+          alignItems: "flex-start" // Ensures both panels start at the same height
         }}
       >
         {/* Left Panel: Input */}
@@ -304,7 +305,7 @@ export default function Home() {
         }}>
           <div style={{ 
             marginBottom: 16, 
-            minHeight: 80,
+            minHeight: 120, // Increased for consistency
             padding: 16,
             background: cardBg,
             borderRadius: 12,
@@ -440,40 +441,6 @@ export default function Home() {
               />
             </div>
           )}
-          {!leftPanelCollapsed && (
-            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-              <button 
-                onClick={() => setInput("")}
-                style={{
-                  padding: "8px 16px",
-                  borderRadius: 6,
-                  border: "1px solid #ccc",
-                  background: darkMode ? "#333" : "#fff",
-                  color: darkMode ? "#fff" : "#333",
-                  fontSize: 14,
-                  cursor: "pointer",
-                  transition: "all 0.2s"
-                }}
-              >
-                Clear
-              </button>
-              <button 
-                onClick={() => handleCopy(input)}
-                style={{
-                  padding: "8px 16px",
-                  borderRadius: 6,
-                  border: "1px solid #ccc",
-                  background: darkMode ? "#333" : "#fff",
-                  color: darkMode ? "#fff" : "#333",
-                  fontSize: 14,
-                  cursor: "pointer",
-                  transition: "all 0.2s"
-                }}
-              >
-                Copy Input
-              </button>
-            </div>
-          )}
         </div>
         {/* Right Panel: Output */}
         <div style={{ 
@@ -483,7 +450,7 @@ export default function Home() {
         }}>
           <div style={{ 
             marginBottom: 16, 
-            minHeight: 80,
+            minHeight: 120, // Increased for consistency
             padding: 16,
             background: cardBg,
             borderRadius: 12,
@@ -728,6 +695,19 @@ export default function Home() {
             </div>
           )}
         </div>
+      </div>
+      
+      {/* Footer */}
+      <div style={{
+        textAlign: "center",
+        marginTop: 48,
+        paddingTop: 24,
+        borderTop: `1px solid ${borderColor}`,
+        opacity: 0.7,
+        fontSize: 14,
+        color: color
+      }}>
+        Made with ❤️ by Vikash
       </div>
     </div>
   );
