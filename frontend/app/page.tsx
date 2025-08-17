@@ -8,6 +8,7 @@ import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-go";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-json";
+import GoogleAd from "../components/GoogleAd";
 
 const LANGUAGES = ["JavaScript", "TypeScript", "Go", "JSON", "CSS", "HTML"];
 
@@ -384,6 +385,14 @@ export default function Home() {
           {darkMode ? "Dark" : "Light"} Mode
         </button>
       </div>
+
+      {/* Top Banner Ad */}
+      <GoogleAd 
+        adSlot={process.env.NEXT_PUBLIC_AD_SLOT_BANNER || "4838737945"} 
+        adFormat="auto"
+        style={{ margin: '20px 0' }}
+      />
+
       {/* History Dropdown */}
       {history.length > 0 && (
         <div style={{ 
@@ -607,6 +616,29 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        {/* Sidebar Ad between panels */}
+        {!isMobile && (
+          <div style={{ 
+            flex: "0 0 160px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            paddingTop: "20px"
+          }}>
+            <GoogleAd 
+              adSlot={process.env.NEXT_PUBLIC_AD_SLOT_SIDEBAR || "6287550988"} 
+              adFormat="vertical"
+              style={{ 
+                width: '160px', 
+                height: '600px',
+                display: 'block'
+              }}
+              responsive={false}
+            />
+          </div>
+        )}
+
         {/* Right Panel: Output */}
         <div style={{ 
           flex: rightPanelCollapsed ? "0 0 40px" : "1 1 50%", 
@@ -831,6 +863,13 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Footer Ad */}
+      <GoogleAd 
+        adSlot={process.env.NEXT_PUBLIC_AD_SLOT_FOOTER || "3525656271"} 
+        adFormat="auto"
+        style={{ margin: '40px 0 20px 0' }}
+      />
       
       {/* Footer */}
       <div style={{
