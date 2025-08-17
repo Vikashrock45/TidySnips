@@ -97,9 +97,10 @@ export default function Home() {
 
     // Custom dark mode styles for better readability
     const customDarkStyles = darkMode ? {
-      color: "#f8f8f2",
+      color: "#ffffff",
       fontSize: "14px",
-      textShadow: "0 1px rgba(0, 0, 0, 0.3)"
+      textShadow: "0 1px rgba(0, 0, 0, 0.8)",
+      fontWeight: "500"
     } : {};
 
     return (
@@ -109,11 +110,13 @@ export default function Home() {
           .language-${prismLang} .token.prolog,
           .language-${prismLang} .token.doctype,
           .language-${prismLang} .token.cdata {
-            color: ${darkMode ? "#75715e" : "#708090"} !important;
+            color: ${darkMode ? "#b0b0b0" : "#708090"} !important;
+            font-weight: ${darkMode ? "500" : "normal"} !important;
           }
           
           .language-${prismLang} .token.punctuation {
-            color: ${darkMode ? "#f8f8f2" : "#999"} !important;
+            color: ${darkMode ? "#ffffff" : "#999"} !important;
+            font-weight: ${darkMode ? "600" : "normal"} !important;
           }
           
           .language-${prismLang} .token.property,
@@ -123,7 +126,8 @@ export default function Home() {
           .language-${prismLang} .token.constant,
           .language-${prismLang} .token.symbol,
           .language-${prismLang} .token.deleted {
-            color: ${darkMode ? "#ae81ff" : "#905"} !important;
+            color: ${darkMode ? "#ff9ff3" : "#905"} !important;
+            font-weight: ${darkMode ? "600" : "normal"} !important;
           }
           
           .language-${prismLang} .token.selector,
@@ -132,30 +136,35 @@ export default function Home() {
           .language-${prismLang} .token.char,
           .language-${prismLang} .token.builtin,
           .language-${prismLang} .token.inserted {
-            color: ${darkMode ? "#a6e22e" : "#690"} !important;
+            color: ${darkMode ? "#7df87a" : "#690"} !important;
+            font-weight: ${darkMode ? "600" : "normal"} !important;
           }
           
           .language-${prismLang} .token.operator,
           .language-${prismLang} .token.entity,
           .language-${prismLang} .token.url,
           .language-${prismLang} .token.variable {
-            color: ${darkMode ? "#f8f8f2" : "#9a6e3a"} !important;
+            color: ${darkMode ? "#ffffff" : "#9a6e3a"} !important;
+            font-weight: ${darkMode ? "600" : "normal"} !important;
           }
           
           .language-${prismLang} .token.atrule,
           .language-${prismLang} .token.attr-value,
           .language-${prismLang} .token.keyword {
-            color: ${darkMode ? "#66d9ef" : "#07a"} !important;
+            color: ${darkMode ? "#5fb3f3" : "#07a"} !important;
+            font-weight: ${darkMode ? "700" : "normal"} !important;
           }
           
           .language-${prismLang} .token.function,
           .language-${prismLang} .token.class-name {
-            color: ${darkMode ? "#f92672" : "#dd4a68"} !important;
+            color: ${darkMode ? "#ffc658" : "#dd4a68"} !important;
+            font-weight: ${darkMode ? "700" : "normal"} !important;
           }
           
           .language-${prismLang} .token.regex,
           .language-${prismLang} .token.important {
-            color: ${darkMode ? "#fd971f" : "#e90"} !important;
+            color: ${darkMode ? "#ff8c42" : "#e90"} !important;
+            font-weight: ${darkMode ? "600" : "normal"} !important;
           }
         `}</style>
         
@@ -306,8 +315,8 @@ export default function Home() {
 
   const background = mounted && darkMode ? "#0a0a0a" : "#f8fafc";
   const color = mounted && darkMode ? "#ededed" : "#1a202c";
-  const codeBg = mounted && darkMode ? "#1a1a1a" : "#ffffff";
-  const codeColor = mounted && darkMode ? "#ededed" : "#2d3748";
+  const codeBg = mounted && darkMode ? "#0f0f0f" : "#ffffff";
+  const codeColor = mounted && darkMode ? "#ffffff" : "#2d3748";
   const cardBg = mounted && darkMode ? "#1a1a1a" : "#ffffff";
   const borderColor = mounted && darkMode ? "#333" : "#e2e8f0";
   const shadowColor = mounted && darkMode ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.08)";
