@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Prism from "prismjs";
-import "prismjs/themes/prism.css";
+import "prismjs/themes/prism-tomorrow.css"; // Better dark theme
 // Import only core language support for Prism (these are more reliably available)
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-typescript";
@@ -95,8 +95,70 @@ export default function Home() {
       Prism.highlightAll();
     }, [code, language]);
 
+    // Custom dark mode styles for better readability
+    const customDarkStyles = darkMode ? {
+      color: "#f8f8f2",
+      fontSize: "14px",
+      textShadow: "0 1px rgba(0, 0, 0, 0.3)"
+    } : {};
+
     return (
       <div style={{ position: "relative" }}>
+        <style jsx>{`
+          .language-${prismLang} .token.comment,
+          .language-${prismLang} .token.prolog,
+          .language-${prismLang} .token.doctype,
+          .language-${prismLang} .token.cdata {
+            color: ${darkMode ? "#75715e" : "#708090"} !important;
+          }
+          
+          .language-${prismLang} .token.punctuation {
+            color: ${darkMode ? "#f8f8f2" : "#999"} !important;
+          }
+          
+          .language-${prismLang} .token.property,
+          .language-${prismLang} .token.tag,
+          .language-${prismLang} .token.boolean,
+          .language-${prismLang} .token.number,
+          .language-${prismLang} .token.constant,
+          .language-${prismLang} .token.symbol,
+          .language-${prismLang} .token.deleted {
+            color: ${darkMode ? "#ae81ff" : "#905"} !important;
+          }
+          
+          .language-${prismLang} .token.selector,
+          .language-${prismLang} .token.attr-name,
+          .language-${prismLang} .token.string,
+          .language-${prismLang} .token.char,
+          .language-${prismLang} .token.builtin,
+          .language-${prismLang} .token.inserted {
+            color: ${darkMode ? "#a6e22e" : "#690"} !important;
+          }
+          
+          .language-${prismLang} .token.operator,
+          .language-${prismLang} .token.entity,
+          .language-${prismLang} .token.url,
+          .language-${prismLang} .token.variable {
+            color: ${darkMode ? "#f8f8f2" : "#9a6e3a"} !important;
+          }
+          
+          .language-${prismLang} .token.atrule,
+          .language-${prismLang} .token.attr-value,
+          .language-${prismLang} .token.keyword {
+            color: ${darkMode ? "#66d9ef" : "#07a"} !important;
+          }
+          
+          .language-${prismLang} .token.function,
+          .language-${prismLang} .token.class-name {
+            color: ${darkMode ? "#f92672" : "#dd4a68"} !important;
+          }
+          
+          .language-${prismLang} .token.regex,
+          .language-${prismLang} .token.important {
+            color: ${darkMode ? "#fd971f" : "#e90"} !important;
+          }
+        `}</style>
+        
         <pre 
           style={{
             width: "100%",
@@ -109,14 +171,14 @@ export default function Home() {
             height: 850,
             boxSizing: "border-box",
             background: codeBg,
-            color: codeColor,
             overflow: "auto",
             margin: 0,
             boxShadow: `inset 0 2px 4px ${shadowColor}`,
-            lineHeight: 1.5
+            lineHeight: 1.5,
+            ...customDarkStyles
           }}
         >
-          <code className={`language-${prismLang}`}>
+          <code className={`language-${prismLang}`} style={customDarkStyles}>
             {code || `// ${mode === "format" ? "Formatted" : "Minified"} ${language} code will appear here...\n// Click "${mode === "format" ? "🚀 Format" : "⚡ Minify"}" to process your code`}
           </code>
         </pre>
@@ -126,7 +188,7 @@ export default function Home() {
           position: "absolute",
           top: 8,
           right: 8,
-          background: darkMode ? "rgba(0,0,0,0.7)" : "rgba(255,255,255,0.9)",
+          background: darkMode ? "rgba(0,0,0,0.8)" : "rgba(255,255,255,0.9)",
           color: darkMode ? "#fff" : "#333",
           padding: "4px 8px",
           borderRadius: 6,
