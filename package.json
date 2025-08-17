@@ -1,0 +1,42 @@
+{
+  "name": "tidysnips",
+  "version": "1.0.0",
+  "description": "Professional code formatter and minifier with real-time processing, security scanning, and multi-language support",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "start": "cd frontend && npm run start",
+    "lint": "cd frontend && npm run lint",
+    "vercel-build": "cd frontend && npm install && npm run build",
+    "install-frontend": "cd frontend && npm install",
+    "install-backend": "cd backend && go mod download",
+    "build-backend": "cd backend && go build -o tidysnips",
+    "docker-build": "docker-compose build",
+    "docker-up": "docker-compose up",
+    "docker-down": "docker-compose down"
+  },
+  "keywords": [
+    "code-formatter",
+    "minifier",
+    "typescript",
+    "javascript",
+    "go",
+    "nextjs",
+    "react",
+    "docker"
+  ],
+  "author": "Vikash",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Vikashrock45/TidySnips.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "workspaces": [
+    "frontend"
+  ]
+}
