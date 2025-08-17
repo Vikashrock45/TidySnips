@@ -40,9 +40,10 @@ export default function Home() {
     setLoading(true);
     setOutput("");
     const endpoint = mode === "format" ? "/api/v1/format" : "/api/v1/minify";
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
     try {
       const reqBody = { code: input, language };
-      const res = await fetch(`http://localhost:8080${endpoint}`, {
+      const res = await fetch(`${apiUrl}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(reqBody),
